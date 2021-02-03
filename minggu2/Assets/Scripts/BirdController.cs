@@ -14,13 +14,13 @@ public class BirdController : MonoBehaviour
     }
 
     public GameObject parent;
-    private Rigidbody2D _rigidBody;
+    protected Rigidbody2D _rigidBody;
     private CircleCollider2D _collider;
 
     public UnityAction OnBirdDestroyed = delegate { };
     public UnityAction<BirdController> OnBirdShoot = delegate { };
 
-    private BirdState _state;
+    protected BirdState _state;
     private float _minVelocity = 0.05f;
     private bool _flagDestroy = false;
 
@@ -81,4 +81,9 @@ public class BirdController : MonoBehaviour
     }
 
     public BirdState State => _state;
+
+    public virtual void OnTap()
+    {
+
+    }
 }
