@@ -315,6 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1107465524}
   - component: {fileID: 1107465525}
+  - component: {fileID: 1107465526}
   m_Layer: 0
   m_Name: ShootArea
   m_TagString: Untagged
@@ -352,6 +353,21 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1107465526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1107465523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03a0cf9ba6e0324068dfec93f44bd432, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  circleCollider2D: {fileID: 1107465525}
+  _pullRadius: 0.75
+  _throwSpeed: 30
 --- !u!1 &1208246252
 GameObject:
   m_ObjectHideFlags: 0
