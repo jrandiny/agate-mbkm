@@ -65,7 +65,7 @@ public class SlingShooter : MonoBehaviour
 
         for (var i = 1; i < segmentCount; i++)
         {
-            var elapsedTime = i * Time.fixedDeltaTime * 5;
+            var elapsedTime = i * Time.fixedDeltaTime * 50 / shootVelocity.magnitude;
             segments[i] = segments[0] + shootVelocity * elapsedTime + 0.5f * Physics2D.gravity * Mathf.Pow(elapsedTime, 2);
         }
 
