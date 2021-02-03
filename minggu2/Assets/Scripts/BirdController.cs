@@ -78,6 +78,7 @@ public class BirdController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         _state = BirdState.HitSomething;
+        OnCollision();
     }
 
     public BirdState State => _state;
@@ -85,6 +86,9 @@ public class BirdController : MonoBehaviour
 
     public virtual void OnTap()
     {
+    }
 
+    protected virtual void OnCollision()
+    {
     }
 }
