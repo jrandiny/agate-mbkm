@@ -9,7 +9,8 @@ public class BirdController : MonoBehaviour
     public enum BirdState
     {
         Idle,
-        Thrown
+        Thrown,
+        HitSomething
     }
 
     public GameObject parent;
@@ -17,6 +18,7 @@ public class BirdController : MonoBehaviour
     private CircleCollider2D _collider;
 
     public UnityAction OnBirdDestroyed = delegate { };
+    public UnityAction<BirdController> OnBirdShoot = delegate { };
 
     private BirdState _state;
     private float _minVelocity = 0.05f;
@@ -41,7 +43,9 @@ public class BirdController : MonoBehaviour
             _state = BirdState.Thrown;
         }
 
-        if (_state == BirdState.Thrown && sqrMagnitude < _minVelocity && !_flagDestroy)
+        if ((_state == BirdState.Thrown || _state == BirdState.HitSomething) &&
+            sqrMagnitude < _minVelocity &&
+            !_flagDestroy)
         {
             _flagDestroy = true;
             Destroy(gameObject, 2);
@@ -60,10 +64,21 @@ public class BirdController : MonoBehaviour
         _collider.enabled = true;
         _rigidBody.bodyType = RigidbodyType2D.Dynamic;
         _rigidBody.velocity = velocity * speed * distance;
+        OnBirdShoot(this);
     }
 
     private void OnDestroy()
     {
-        OnBirdDestroyed();
+        if (_state == BirdState.Thrown || _state == BirdState.HitSomething)
+        {
+            OnBirdDestroyed();
+        }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        _state = BirdState.HitSomething;
+    }
+
+    public BirdState State => _state;
 }
