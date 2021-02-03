@@ -8,6 +8,7 @@ public class SlingShooter : MonoBehaviour
 {
     public CircleCollider2D circleCollider2D;
     private Vector2 _startPosition;
+    private BirdController _bird;
 
     [SerializeField] private float _pullRadius = 0.75f;
     [SerializeField] private float _throwSpeed = 30f;
@@ -24,6 +25,8 @@ public class SlingShooter : MonoBehaviour
         var velocity = _startPosition - currentPosition;
         var distance = Vector2.Distance(_startPosition, currentPosition);
 
+        _bird.Shoot(velocity, distance, _throwSpeed);
+
         transform.position = _startPosition;
     }
 
@@ -34,5 +37,12 @@ public class SlingShooter : MonoBehaviour
         var diff = Vector2.ClampMagnitude(mousePosition - _startPosition, _pullRadius);
 
         transform.position = _startPosition + diff;
+    }
+
+    public void InitiateBird(BirdController bird)
+    {
+        _bird = bird;
+        _bird.MoveTo(transform.position, gameObject);
+        circleCollider2D.enabled = true;
     }
 }
