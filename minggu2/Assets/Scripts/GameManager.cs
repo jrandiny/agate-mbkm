@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public TrailController trailController;
     public List<BirdController> birds;
     public List<EnemyController> enemies;
+    public String nextScene;
 
     public BoxCollider2D tapCollider;
 
@@ -71,6 +73,10 @@ public class GameManager : MonoBehaviour
         if(enemies.Count == 0)
         {
             _isGameEnded = true;
+            if (nextScene != null)
+            {
+                SceneManager.LoadScene(nextScene);
+            }
         }
     }
 
