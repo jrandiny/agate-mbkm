@@ -32,14 +32,14 @@ public class GameManager : MonoBehaviour
         _shotBird = birds[0];
     }
 
-    public void AssignTrail(BirdController bird)
+    private void AssignTrail(BirdController bird)
     {
         trailController.SetBird(bird);
         StartCoroutine(trailController.SpawnTrail());
         tapCollider.enabled = true;
     }
 
-    public void ChangeBird()
+    private void ChangeBird()
     {
         tapCollider.enabled = false;
 
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckGameEnd(GameObject destroyedEnemy)
+    private void CheckGameEnd(GameObject destroyedEnemy)
     {
         for(int i = 0; i < enemies.Count; i++)
         {

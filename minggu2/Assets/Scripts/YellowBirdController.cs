@@ -9,9 +9,9 @@ public class YellowBirdController : BirdController
 
     private void Boost()
     {
-        if (_state == BirdState.Thrown && !_hasBoost)
+        if (State == BirdState.Thrown && !_hasBoost)
         {
-            _rigidBody.AddForce(_rigidBody.velocity * boostForce);
+            RigidBody.AddForce(RigidBody.velocity * boostForce);
             _hasBoost = true;
         }
     }
