@@ -57,6 +57,10 @@ public class GameManager : MonoBehaviour
             slingShot.InitiateBird(birds[0]);
             _shotBird = birds[0];
         }
+        else
+        {
+            SceneManager.LoadScene("Lose");
+        }
     }
 
     private void CheckGameEnd(GameObject destroyedEnemy)
@@ -76,6 +80,10 @@ public class GameManager : MonoBehaviour
             if (nextScene != null)
             {
                 SceneManager.LoadScene(nextScene);
+            }
+            else
+            {
+                SceneManager.LoadScene("Win");
             }
         }
     }
