@@ -24,7 +24,7 @@ public class GameOverManager : MonoBehaviour
 
     private void Update()
     {
-        if (playerHealth.currentHealth > 0) return;
+        if (playerHealth.CurrentHealth > 0) return;
 
         _isGameOver = true;
         

@@ -3,20 +3,20 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyManager : MonoBehaviour
+public class ItemManager : MonoBehaviour
 {
     [Serializable]
-    public struct EnemyType
+    public struct ItemType
     {
-        public string enemyTag;
+        public string itemTag;
         public int spawnOdds;
     }
     // Seharusnya enemyType bisa langsung prefabnya, tapi karena di tutorial mengharuskan penggunaaan factory jadinya digunakan
 
 
-    [SerializeField] private EnemyFactory enemyFactory;
+    [SerializeField] private ItemFactory itemFactory;
     [SerializeField] private PlayerHealth playerHealth;
-    [SerializeField] private EnemyType[] enemyTypes;
+    [SerializeField] private ItemType[] itemTypes;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private float spawnTime = 3f;
 
@@ -25,13 +25,13 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        _totalOdds = enemyTypes.Aggregate(0, (sum, entry) => sum + entry.spawnOdds);
+        _totalOdds = itemTypes.Aggregate(0, (sum, entry) => sum + entry.spawnOdds);
 
-        _spawnTypeLookup = new int[enemyTypes.Length];
-        _spawnTypeLookup[0] = enemyTypes[0].spawnOdds;
-        for (var i = 1; i < enemyTypes.Length; i++)
+        _spawnTypeLookup = new int[itemTypes.Length];
+        _spawnTypeLookup[0] = itemTypes[0].spawnOdds;
+        for (var i = 1; i < itemTypes.Length; i++)
         {
-            _spawnTypeLookup[i] = _spawnTypeLookup[i - 1] + enemyTypes[i].spawnOdds;
+            _spawnTypeLookup[i] = _spawnTypeLookup[i - 1] + itemTypes[i].spawnOdds;
         }
 
         InvokeRepeating(nameof(Spawn), spawnTime, spawnTime);
@@ -40,25 +40,25 @@ public class EnemyManager : MonoBehaviour
 
     private void Spawn()
     {
-        if (playerHealth.currentHealth <= 0f)
+        if (playerHealth.CurrentHealth <= 0f)
         {
             return;
         }
 
         var spawnPointIndex = Random.Range(0, spawnPoints.Length);
 
-        var enemyRandomType = Random.Range(0, _totalOdds);
-        var chosenEnemy = 0;
+        var itemRandomType = Random.Range(0, _totalOdds);
+        var chosenItem = 0;
         for (var i = 0; i < _spawnTypeLookup.Length; i++)
         {
-            if (enemyRandomType >= _spawnTypeLookup[i]) continue;
+            if (itemRandomType >= _spawnTypeLookup[i]) continue;
 
-            chosenEnemy = i;
+            chosenItem = i;
             break;
         }
 
-        enemyFactory.Create(
-            enemyTypes[chosenEnemy].enemyTag,
+        itemFactory.Create(
+            itemTypes[chosenItem].itemTag,
             spawnPoints[spawnPointIndex].position,
             spawnPoints[spawnPointIndex].rotation
         );

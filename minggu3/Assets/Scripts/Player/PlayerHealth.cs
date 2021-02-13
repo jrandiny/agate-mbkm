@@ -14,18 +14,27 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
 
-    [HideInInspector] public int currentHealth;
     private Animator _animator;
     private AudioSource _playerAudio;
 
     private PlayerMovement _playerMovement;
     private PlayerShooting _playerShooting;
-    
+
     private bool _isDead;
     private bool _damaged;
-    
+    private int _currentHealth;
+
     private static readonly int DieAnimTrigger = Animator.StringToHash("Die");
 
+    public int CurrentHealth
+    {
+        get => _currentHealth;
+        private set
+        {
+            _currentHealth = value;
+            healthSlider.value = value;
+        }
+    }
 
     private void Awake()
     {
@@ -34,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
         _playerMovement = GetComponent<PlayerMovement>();
         _playerShooting = GetComponentInChildren<PlayerShooting>();
 
-        currentHealth = startingHealth;
+        CurrentHealth = startingHealth;
     }
 
 
@@ -50,15 +59,19 @@ public class PlayerHealth : MonoBehaviour
     {
         _damaged = true;
 
-        currentHealth -= amount;
-        healthSlider.value = currentHealth;
+        CurrentHealth -= amount;
 
         _playerAudio.Play();
 
-        if (currentHealth <= 0 && !_isDead)
+        if (CurrentHealth <= 0 && !_isDead)
         {
             Death();
         }
+    }
+
+    public void IncreaseHealth(int delta)
+    {
+        CurrentHealth = Mathf.Clamp(CurrentHealth + delta, 0, startingHealth);
     }
 
 
