@@ -73,7 +73,7 @@ public class PlayerHealth : MonoBehaviour
         _playerAudio.clip = deathClip;
         _playerAudio.Play();
 
-        _playerMovement.enabled = false;
-        _playerShooting.enabled = false;
+        _playerMovement.DisableMovement();
+        _playerShooting.DisableShooting();
     }
 }

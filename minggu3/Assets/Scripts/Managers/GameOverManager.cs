@@ -13,6 +13,8 @@ public class GameOverManager : MonoBehaviour
     private float _restartTimer;
     private static readonly int GameOverAnimTrigger = Animator.StringToHash("GameOver");
     private static readonly int WarningAnimTrigger = Animator.StringToHash("Warning");
+
+    private bool _isGameOver = false;
     
     private void Awake()
     {
@@ -23,6 +25,8 @@ public class GameOverManager : MonoBehaviour
     private void Update()
     {
         if (playerHealth.currentHealth > 0) return;
+
+        _isGameOver = true;
         
         _animator.SetTrigger(GameOverAnimTrigger);
 
@@ -36,6 +40,8 @@ public class GameOverManager : MonoBehaviour
 
     public void ShowWarning(float enemyDistance)
     {
+        if (_isGameOver) return;
+        
         warningText.text = $"{Mathf.RoundToInt(enemyDistance)}m!";
         _animator.SetTrigger(WarningAnimTrigger);
     }

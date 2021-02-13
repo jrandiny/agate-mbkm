@@ -18,7 +18,8 @@ public class PlayerShooting : MonoBehaviour
     private LineRenderer _gunLine;                           
     private AudioSource _gunAudio;                           
     private Light _gunLight;                                 
-    private float effectsDisplayTime = 0.2f;
+    private const float EffectsDisplayTime = 0.2f;
+    private bool _shootingDisabled = false;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class PlayerShooting : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer >= timeBetweenBullets * effectsDisplayTime)
+        if (_timer >= timeBetweenBullets * EffectsDisplayTime)
         {
             DisableEffects();
         }
@@ -45,8 +46,14 @@ public class PlayerShooting : MonoBehaviour
         _gunLight.enabled = false;
     }
 
+    public void DisableShooting()
+    {
+        _shootingDisabled = true;
+    }
+
     public void Shoot()
     {
+        if (_shootingDisabled) return;
         if (_timer <= timeBetweenBullets) return;
         
         _timer = 0f;
