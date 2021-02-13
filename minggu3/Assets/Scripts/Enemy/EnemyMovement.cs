@@ -14,7 +14,6 @@ public class EnemyMovement : MonoBehaviour
     private Transform _player;
     private NavMeshAgent _navMeshAgent;
 
-    private Vector3 _initialPosition;
     private bool _ready;
 
 
@@ -32,16 +31,17 @@ public class EnemyMovement : MonoBehaviour
 
     private IEnumerator RiseUp()
     {
-        _initialPosition = transform.position;
-        Instantiate(spawnGravePrefab, _initialPosition, Quaternion.identity);
-        var undergroundPosition = new Vector3(_initialPosition.x, -2f, _initialPosition.z);
-
+        var undergroundPosition = transform.position;
+        
+        var startPosition = new Vector3(undergroundPosition.x, 0f, undergroundPosition.z);
+        Instantiate(spawnGravePrefab, startPosition, Quaternion.identity);
+        
         for (var i = 0; i < riseUpAnimTime; i++)
         {
             yield return new WaitForSeconds(0.01f);
             transform.position = Vector3.Lerp(
                 undergroundPosition,
-                _initialPosition,
+                startPosition,
                 Mathf.SmoothStep(0, 1f, i / riseUpAnimTime)
             );
         }
