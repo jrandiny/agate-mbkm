@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements.Experimental;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
@@ -32,10 +31,11 @@ public class EnemyMovement : MonoBehaviour
     private IEnumerator RiseUp()
     {
         var undergroundPosition = transform.position;
-        
+
         var startPosition = new Vector3(undergroundPosition.x, 0f, undergroundPosition.z);
-        Instantiate(spawnGravePrefab, startPosition, Quaternion.identity);
-        
+        var grave = Instantiate(spawnGravePrefab, startPosition, Quaternion.identity);
+        Destroy(grave, riseUpAnimTime * 0.01f);
+
         for (var i = 0; i < riseUpAnimTime; i++)
         {
             yield return new WaitForSeconds(0.01f);
