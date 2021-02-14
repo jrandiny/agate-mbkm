@@ -33,8 +33,7 @@ public class EnemyMovement : MonoBehaviour
         var undergroundPosition = transform.position;
 
         var startPosition = new Vector3(undergroundPosition.x, 0f, undergroundPosition.z);
-        var grave = Instantiate(spawnGravePrefab, startPosition, Quaternion.identity);
-        Destroy(grave, riseUpAnimTime * 0.01f);
+        Instantiate(spawnGravePrefab, startPosition, Quaternion.identity);
 
         for (var i = 0; i < riseUpAnimTime; i++)
         {

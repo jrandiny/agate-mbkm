@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94f6618a0da65fa45b24d5105d5d8422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riseUpAnimTime: 125
+  riseUpAnimTime: 250
   spawnGravePrefab: {fileID: 4676524651086686200, guid: cbd88f40ca4c9e84bab9c60568fc1ddf,
     type: 3}
 --- !u!114 &2544334975794620250

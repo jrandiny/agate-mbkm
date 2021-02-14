@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: babab9a1b3f0651d09ff7ebb32d33c59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTimer: 3
+  despawnTimer: 5
   targetSpeed: 10
   powerupLength: 5
 --- !u!1 &7299405641430426334
