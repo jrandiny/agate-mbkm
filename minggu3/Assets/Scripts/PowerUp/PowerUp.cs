@@ -7,10 +7,12 @@ public abstract class PowerUp : MonoBehaviour
 {
     [SerializeField] private float despawnTimer = 3f;
     private AudioSource _audioSource;
+    private Collider _collider;
 
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
+        _collider = GetComponent<Collider>();
         StartCoroutine(DespawnTimer());
     }
 
@@ -24,13 +26,15 @@ public abstract class PowerUp : MonoBehaviour
     {
         if (!other.CompareTag("Player") || other.isTrigger) return;
 
+        _collider.enabled = false;
+
+        transform.position = new Vector3(0, -50, 0);
+
         executePower(other.gameObject);
 
-        gameObject.transform.position = new Vector3(0, 50, 0);
+        Destroy(gameObject, _audioSource.clip.length);
 
         _audioSource.Play();
-
-        Destroy(gameObject, _audioSource.clip.length);
     }
 
     protected abstract void executePower(GameObject player);

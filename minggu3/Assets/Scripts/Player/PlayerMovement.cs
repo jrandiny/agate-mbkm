@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float initialSpeed = 6f;
+    [SerializeField] private PowerUpUiManager powerUpUiManager;
 
     private Animator _animator;
     private Rigidbody _rigidbody;
@@ -39,6 +40,8 @@ public class PlayerMovement : MonoBehaviour
     public void SpeedUp(float targetSpeed, float length)
     {
         _speed = targetSpeed;
+
+        powerUpUiManager.ShowTimer(length);
 
         StopAllCoroutines();
         StartCoroutine(ResetSpeed(length));
