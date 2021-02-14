@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTime: 5
-  _canvasGroup: {fileID: 0}
+  canvasGroup: {fileID: 63767647}
 --- !u!225 &63767647
 CanvasGroup:
   m_ObjectHideFlags: 0

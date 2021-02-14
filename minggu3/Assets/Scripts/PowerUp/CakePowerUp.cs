@@ -3,7 +3,7 @@
 public class CakePowerUp : PowerUp
 {
     [SerializeField] private int healthIncrease = 10;
-    protected override void executePower(GameObject player)
+    protected override void ExecutePower(GameObject player)
     {
         var health = player.GetComponent<PlayerHealth>();
         health.IncreaseHealth(healthIncrease);

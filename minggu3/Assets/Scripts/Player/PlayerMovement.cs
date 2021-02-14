@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour
     private bool _stopMovement = false;
     private float _speed;
 
+    private Camera _mainCamera;
+
     private void Awake()
     {
         _floorMask = LayerMask.GetMask("Floor");
@@ -25,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody>();
 
         _speed = initialSpeed;
+        
+        _mainCamera = Camera.main;
     }
 
     private void FixedUpdate()
@@ -65,10 +69,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_stopMovement) return;
 
-        var camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var camRay = _mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        RaycastHit floorHit;
-        if (!Physics.Raycast(camRay, out floorHit, CamRayLength, _floorMask)) return;
+        if (!Physics.Raycast(camRay, out var floorHit, CamRayLength, _floorMask)) return;
 
         var playerToMouseFloorRay = floorHit.point - transform.position;
         playerToMouseFloorRay.y = 0f;

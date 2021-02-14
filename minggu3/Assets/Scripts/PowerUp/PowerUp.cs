@@ -27,15 +27,14 @@ public abstract class PowerUp : MonoBehaviour
         if (!other.CompareTag("Player") || other.isTrigger) return;
 
         _collider.enabled = false;
-
         transform.position = new Vector3(0, -50, 0);
 
-        executePower(other.gameObject);
+        _audioSource.Play();
+        ExecutePower(other.gameObject);
 
         Destroy(gameObject, _audioSource.clip.length);
 
-        _audioSource.Play();
     }
 
-    protected abstract void executePower(GameObject player);
+    protected abstract void ExecutePower(GameObject player);
 }
