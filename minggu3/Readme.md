@@ -11,6 +11,7 @@ Simple survival shooter game created for Agate MBKM coursework
 ## Modification from Instruction
 
 - Modify movement input to allow 8 direction movement
+- Fix enemy warning detector to show nearest enemy
 - Add more lightning effect
 - Add simple spawn particle effect
 - Use List instead of queue for command queue and limit the queue max length
